@@ -2,29 +2,15 @@
 using BookingApp.Repository;
 using BookingApp.Model;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Runtime.CompilerServices;
 
 namespace BookingApp.View
 {
-    /// <summary>
-    /// Interaction logic for AdminMainWindow.xaml
-    /// </summary>
     public partial class AdminMainWindow : Window, INotifyPropertyChanged
     {
         private HotelRepository hotelRepository;
@@ -38,7 +24,7 @@ namespace BookingApp.View
             get { return _searchName; }
             set
             {
-                if(_searchName != value)
+                if (_searchName != value)
                 {
                     _searchName = value;
                     OnPropertyChanged();
@@ -92,9 +78,6 @@ namespace BookingApp.View
             }
         }
 
-
-
-
         public AdminMainWindow(User currentUser)
         {
             InitializeComponent();
@@ -109,8 +92,6 @@ namespace BookingApp.View
             _searchStars = "0";
             _searchYear = "0";
             Update();
-
-
         }
 
         public void Update()
@@ -119,7 +100,6 @@ namespace BookingApp.View
             foreach (Hotel hotel in hotelRepository.GetAll())
             {
                 _hotelDTOs.Add(new HotelDTO(hotel));
-
             }
         }
 
@@ -146,8 +126,8 @@ namespace BookingApp.View
 
         private void AddNewUser()
         {
-            AdminAddUser aminAddUser = new AdminAddUser();
-            aminAddUser.Show();
+            AdminAddUser adminAddUser = new AdminAddUser();
+            adminAddUser.Show();
         }
 
         private void ApplyFilter()
@@ -158,7 +138,6 @@ namespace BookingApp.View
                 string searchName = SearchName.ToLower();
                 int searchYears = Int32.Parse(SearchYear);
                 int searchStars = Int32.Parse(SearchStars);
-
 
                 var filteredHotels = _hotelDTOs.Where(a =>
                     (string.IsNullOrEmpty(searchId) || a.Id.ToLower().Contains(searchId)) &&

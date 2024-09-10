@@ -2,34 +2,19 @@
 using BookingApp.Repository;
 using BookingApp.Model;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace BookingApp.View
 {
-    /// <summary>
-    /// Interaction logic for OwnerMainWindow.xaml
-    /// </summary>
-    public partial class OwnerMainWindow : Window, INotifyPropertyChanged
+    public partial class BaseMainWindow : Window, INotifyPropertyChanged
     {
-        private HotelRepository hotelRepository;
+        protected HotelRepository hotelRepository;
         public ObservableCollection<HotelDTO> _hotelDTOs { get; set; }
-        private User CurrentUser { get; set; }
+        protected User CurrentUser { get; set; }
         public HotelDTO SelectedHotel { get; set; }
 
         private string _searchName;
@@ -42,7 +27,7 @@ namespace BookingApp.View
                 {
                     _searchName = value;
                     OnPropertyChanged();
-                    Update();
+                    UpdateHotels();
                 }
             }
         }
@@ -57,7 +42,7 @@ namespace BookingApp.View
                 {
                     _searchStars = value;
                     OnPropertyChanged();
-                    Update();
+                    UpdateHotels();
                 }
             }
         }
@@ -72,7 +57,7 @@ namespace BookingApp.View
                 {
                     _searchId = value;
                     OnPropertyChanged();
-                    Update();
+                    UpdateHotels();
                 }
             }
         }
@@ -87,76 +72,74 @@ namespace BookingApp.View
                 {
                     _searchYear = value;
                     OnPropertyChanged();
-                    Update();
+                    UpdateHotels();
                 }
             }
         }
-        public OwnerMainWindow(User currentUser)
+
+        public BaseMainWindow()
         {
             InitializeComponent();
             DataContext = this;
-            CurrentUser = currentUser;
             hotelRepository = new HotelRepository();
             _hotelDTOs = new ObservableCollection<HotelDTO>();
             SelectedHotel = new HotelDTO();
 
+            // Initialize filters with default values
             _searchName = string.Empty;
             _searchId = string.Empty;
             _searchStars = "0";
             _searchYear = "0";
-            Update();
+
+            UpdateHotels();
         }
 
-
-
-        public void Update()
+        // Updates the ObservableCollection of hotels by fetching data and applying filters
+        public void UpdateHotels()
         {
             _hotelDTOs.Clear();
             foreach (Hotel hotel in hotelRepository.GetAll())
             {
                 _hotelDTOs.Add(new HotelDTO(hotel));
-
             }
-        }
-
-        private void ApplyFilters_Click(object sender, RoutedEventArgs e)
-        {
             ApplyFilter();
         }
-        private void ApplyFilter()
+
+        // Applies the filter based on search criteria
+        protected void ApplyFilter()
         {
             try
             {
                 string searchId = SearchId.ToLower();
                 string searchName = SearchName.ToLower();
-                int searchYears = Int32.Parse(SearchYear);
-                int searchStars = Int32.Parse(SearchStars);
+                int searchYear = int.Parse(SearchYear);
+                int searchStars = int.Parse(SearchStars);
 
-
-                var filteredHotels = _hotelDTOs.Where(a =>
-                    (string.IsNullOrEmpty(searchId) || a.Id.ToLower().Contains(searchId)) &&
-                    (string.IsNullOrEmpty(searchName) || a.Name.ToLower().Contains(searchName)) &&
-                    (searchYears == 0 || searchYears == a.YearOpened) &&
-                    (searchStars == 0 || searchStars == a.Stars)
-                    ).ToList();
+                var filteredHotels = _hotelDTOs.Where(hotel =>
+                    (string.IsNullOrEmpty(searchId) || hotel.Id.ToLower().Contains(searchId)) &&
+                    (string.IsNullOrEmpty(searchName) || hotel.Name.ToLower().Contains(searchName)) &&
+                    (searchYear == 0 || searchYear == hotel.YearOpened) &&
+                    (searchStars == 0 || searchStars == hotel.Stars)
+                ).ToList();
 
                 _hotelDTOs.Clear();
-                foreach (var accommodation in filteredHotels)
+                foreach (var hotel in filteredHotels)
                 {
-                    _hotelDTOs.Add(accommodation);
+                    _hotelDTOs.Add(hotel);
                 }
             }
             catch
             {
-                MessageBox.Show("Wrong values in search");
+                MessageBox.Show("Invalid search criteria. Please check your input.");
             }
         }
 
+        // Event handler for when search filters are updated (could be invoked by role-specific windows)
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

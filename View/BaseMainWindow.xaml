@@ -1,0 +1,32 @@
+﻿<Window x:Class="BookingApp.View.BaseMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="BaseMainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Welcome to the Hotel Management System" HorizontalAlignment="Center" FontSize="16" Margin="10"/>
+
+        <!-- Shared ListView for displaying hotels -->
+        <ListView Grid.Row="1" ItemsSource="{Binding _hotelDTOs}" SelectedItem="{Binding SelectedHotel}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Year" DisplayMemberBinding="{Binding YearOpened}" />
+                    <GridViewColumn Header="Stars" DisplayMemberBinding="{Binding Stars}" />
+                    <GridViewColumn Header="Owner Jmbg" DisplayMemberBinding="{Binding OwnerJmbg}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Placeholder for buttons or other role-specific controls -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" x:Name="RoleSpecificControls">
+            <!-- Buttons for each role will be added in specific windows -->
+        </StackPanel>
+    </Grid>
+</Window>

@@ -40,6 +40,7 @@ namespace BookingApp.Model
             //Apartments.Clear();
 
             // Parse the Apartments CSV string and add to the dictionary
+            /*
             string apartmentsCSV = values[5];
             if (!string.IsNullOrEmpty(apartmentsCSV))
             {
@@ -53,6 +54,7 @@ namespace BookingApp.Model
                     Apartments.Add(apartmentId, new Apartment(apartmentId, apartmentName));
                 }
             }
+            */
         }
 
         public string[] ToCSV()
