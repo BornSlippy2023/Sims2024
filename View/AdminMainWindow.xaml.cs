@@ -133,6 +133,17 @@ namespace BookingApp.View
             AddNewUser();
         }
 
+        private void AddNewHotel_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewHotel();
+        }
+
+        private void AddNewHotel()
+        {
+            AdminAddHotel adminAddHotel = new AdminAddHotel();
+            adminAddHotel.Show();
+        }
+
         private void AddNewUser()
         {
             AdminAddUser aminAddUser = new AdminAddUser();

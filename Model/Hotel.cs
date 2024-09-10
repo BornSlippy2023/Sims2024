@@ -61,14 +61,15 @@ namespace BookingApp.Model
             string[] basicValues = { Id, Name, YearOpened.ToString(), Stars.ToString(), OwnerJmbg };
 
             // Convert the Apartments dictionary to a CSV string
-            string apartmentsCSV = string.Join(";", Apartments.Select(a => $"{a.Key},{a.Value.Name}"));
+            
+            //string apartmentsCSV = string.Join(";", Apartments.Select(a => $"{a.Key},{a.Value.Name}"));
 
             // Combine all values into one array
-            string[] csvValues = new string[basicValues.Length + 1];
-            Array.Copy(basicValues, csvValues, basicValues.Length);
-            csvValues[basicValues.Length] = apartmentsCSV;
-
-            return csvValues;
+            
+            //Array.Copy(basicValues, csvValues, basicValues.Length);
+            //csvValues[basicValues.Length] = apartmentsCSV;
+            
+            return basicValues;
         }
     }
 }
