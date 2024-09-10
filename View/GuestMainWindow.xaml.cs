@@ -85,6 +85,7 @@ namespace BookingApp.View
             hotelRepository = new HotelRepository();
             _hotelDTOs = new ObservableCollection<HotelDTO>();
             SelectedHotel = new HotelDTO();
+            SelectedHotel.Id = "-1";
 
             _searchName = string.Empty;
             _searchId = string.Empty;
@@ -123,6 +124,19 @@ namespace BookingApp.View
             catch
             {
                 MessageBox.Show("Wrong values in search");
+            }
+        }
+
+        private void MakeReservation_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedHotel.Id == "-1")
+            {
+                MessageBox.Show("Select hotel first");
+            }
+            else
+            {
+                MakeReservationPage reservationView = new MakeReservationPage(CurrentUser, SelectedHotel);
+                reservationView.Show();
             }
         }
 
