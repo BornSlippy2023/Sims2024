@@ -58,7 +58,7 @@ namespace BookingApp.Model
             FirstName = values[4];
             LastName = values[5];
             PhoneNumber = values[6];
-            Role = (UserRole)Convert.ToInt32(values[7]);
+            Role = Enum.TryParse<UserRole>(values[7], out var role) ? role : UserRole.GUEST; // Default to UserRole.GUEST if parsing fails
         }
     }
 }

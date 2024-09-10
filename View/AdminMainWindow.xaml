@@ -55,31 +55,33 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Grid.Column="0">Name</Label>
-                <TextBox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Width="150" Text="{Binding SearchName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+                <Label Grid.Row="0" Grid.Column="0">Id</Label>
+                <TextBox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Width="150" Text="{Binding SearchId, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
 
-                <Label Grid.Row="0" Grid.Column="1">Country</Label>
-                <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="150" Text="{Binding SearchCountry, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+                <Label Grid.Row="0" Grid.Column="1">Name</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="150" Text="{Binding SearchName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
 
-                <Label Grid.Row="0" Grid.Column="2">City</Label>
-                <TextBox Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" Width="150" Text="{Binding SearchCity, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+                <Label Grid.Row="0" Grid.Column="2">Year</Label>
+                <TextBox Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" Width="150" Text="{Binding SearchYear, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
 
-                <Label Grid.Row="2" Grid.Column="0">Type</Label>
-                <ComboBox Grid.Row="3" Grid.Column="0" Width="100" HorizontalAlignment="Left" SelectedValue="{Binding SearchType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    <ComboBoxItem Content="ALL"/>
-                    <ComboBoxItem Content="APARTMENT"/>
-                    <ComboBoxItem Content="HUT"/>
-                    <ComboBoxItem Content="HOUSE"/>
-                </ComboBox>
+                <Button 
+                     Content="Apply Filters"
+                    Grid.Row="1"
+                    Grid.Column="4"
+                    Style="{StaticResource AccomButton}"
+                    Click="ApplyFilters_Click" Grid.ColumnSpan="2"
+                />
 
-                <Label Grid.Row="2" Grid.Column="1">Number of days</Label>
-                <TextBox Grid.Row="3" Grid.Column="1"  HorizontalAlignment="Left" Width="150" Text="{Binding SearchDays, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"></TextBox>
+                <Label Grid.Row="2" Grid.Column="1">Stars</Label>
+                <TextBox Grid.Row="3" Grid.Column="1"  HorizontalAlignment="Left" Width="150" Text="{Binding SearchStars, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"></TextBox>
 
-
-                <Label Grid.Row="2" Grid.Column="2">Number of people</Label>
-                <TextBox Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" Width="150" Text="{Binding SearchPeople, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"></TextBox>
-
-
+                <Button 
+                    Content="Add new user"
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Style="{StaticResource AccomButton}"
+                    Click="AddNewUser_Click" Grid.ColumnSpan="1"
+                />
 
 
             </Grid>

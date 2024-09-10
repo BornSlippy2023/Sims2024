@@ -1,3 +1,5 @@
-0|1234232|pera@gmail.com|123|Pera|Peric|0616558665|1
-1|1234567|admin@gmail.com|123|Admin|Adminovic|064234232|0
-2|1111222|owner@gmail.com|123|Mitar|Mitrovic|0634023234|2
+0|1234232|pera@gmail.com|123|Pera|Peric|0616558665|GUEST
+1|1234567|admin@gmail.com|123|Admin|Adminovic|064234232|ADMIN
+2|1111222|owner@gmail.com|123|Mitar|Mitrovic|0634023234|OWNER
+3|12312377|probni@gmail.com|123|Mirko|Markovic|0652385923|ADMIN
+4|6|probni2@gmail.com|123|PSDASAD|sadadssa|15287281473|ADMIN
